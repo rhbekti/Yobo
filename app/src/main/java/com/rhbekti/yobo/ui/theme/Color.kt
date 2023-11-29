@@ -2,10 +2,17 @@ package com.rhbekti.yobo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// primary
+val CoolBlue = Color(0xFF0064D2)
+val BrightYellow = Color(0xFFFFDD25)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// secondary
+val Orange = Color(0xFFFF7200)
+val Black = Color(0xFF222222)
+val DarkGrey = Color(0xFF888888)
+val LightGrey = Color(0xFFDDDDDD)
+val SoftGrey = Color(0xFFF7F7F7)
+
+val LightGreen = Color(0xFF00A923)
+val LightRed = Color(0xFFF12736)
+val LightBlue = Color(0xFF00AFD5)

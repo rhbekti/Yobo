@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Yobo</string>
+    <string name="logo_yobo">Logo Yobo</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
 </resources>
