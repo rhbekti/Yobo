@@ -2,4 +2,7 @@
     <string name="app_name">Yobo</string>
     <string name="logo_yobo">Logo Yobo</string>
     <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="web_client_id">189904280792-r13d2sk3lmkeggg6nh8r2jo865n46mj6.apps.googleusercontent.com</string>
+    <string name="sign_in">sign_in</string>
+    <string name="home">home</string>
 </resources>
