@@ -5,4 +5,7 @@
     <string name="web_client_id">189904280792-r13d2sk3lmkeggg6nh8r2jo865n46mj6.apps.googleusercontent.com</string>
     <string name="sign_in">sign_in</string>
     <string name="home">home</string>
+    <string name="search">search</string>
+    <string name="loans">loans</string>
+    <string name="profile">profile</string>
 </resources>

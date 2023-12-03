@@ -1,6 +1,7 @@
 package com.rhbekti.yobo.ui.screen.signIn
 
 import androidx.lifecycle.ViewModel
+import com.rhbekti.yobo.ui.common.SignInResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

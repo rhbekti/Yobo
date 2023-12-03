@@ -10,6 +10,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.rhbekti.yobo.R
+import com.rhbekti.yobo.ui.common.SignInResult
+import com.rhbekti.yobo.ui.common.UserData
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
 
