@@ -1,4 +1,4 @@
-package com.rhbekti.yobo.ui.screen.signIn
+package com.rhbekti.yobo.ui.common
 
 data class SignInResult (
     val data: UserData?,
