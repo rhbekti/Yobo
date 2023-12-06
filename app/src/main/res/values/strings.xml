@@ -8,4 +8,7 @@
     <string name="search">search</string>
     <string name="loans">loans</string>
     <string name="profile">profile</string>
+    <string name="hello">hello</string>
+    <string name="loan_book">Loan Book</string>
+    <string name="categories">Categories</string>
 </resources>
