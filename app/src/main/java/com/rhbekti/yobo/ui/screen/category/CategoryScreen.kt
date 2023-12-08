@@ -34,7 +34,7 @@ fun CategoryScreen(
             }
 
             is Result.Success -> {
-                Log.d("Cat Data: ", category.data.toString())
+                Log.d("catdata", category.data.toString())
                 CategoryContent(category.data)
             }
         }

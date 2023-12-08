@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -83,7 +84,13 @@ fun YoboApp(
 
                 LaunchedEffect(key1 = Unit) {
                     if (googleAuthUiClient.getSignedInUser() !== null) {
-                        navController.navigate(Screen.Home.route)
+                        navController.navigate(Screen.Home.route){
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
+                        }
                     }
                 }
 
@@ -103,7 +110,13 @@ fun YoboApp(
 
                 LaunchedEffect(key1 = state.isSignInSuccessful) {
                     if (state.isSignInSuccessful) {
-                        navController.navigate(Screen.Home.route)
+                        navController.navigate(Screen.Home.route){
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
+                        }
                         signInViewModel.resetState()
                     }
                 }
