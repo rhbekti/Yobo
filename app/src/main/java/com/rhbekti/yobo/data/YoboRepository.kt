@@ -1,6 +1,7 @@
 package com.rhbekti.yobo.data
 
 import android.util.Log
+import com.rhbekti.yobo.data.remote.response.BookItems
 import com.rhbekti.yobo.data.remote.response.CategoryItems
 import com.rhbekti.yobo.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +16,17 @@ class YoboRepository constructor(
         try {
             val categories = apiService.getCategories().data
             emit(Result.Success(categories))
+        } catch (e: Exception) {
+            Log.d("yobo_repo", e.message.toString())
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    suspend fun getAllBooks(): Flow<Result<List<BookItems>>> = flow {
+        emit(Result.Loading)
+        try {
+            val books = apiService.getBooks().data
+            emit(Result.Success(books))
         } catch (e: Exception) {
             Log.d("yobo_repo", e.message.toString())
             emit(Result.Error(e.message.toString()))

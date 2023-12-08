@@ -27,6 +27,7 @@ import com.rhbekti.yobo.R
 import com.rhbekti.yobo.ui.common.UserData
 import com.rhbekti.yobo.ui.component.CardLoan
 import com.rhbekti.yobo.ui.component.ContentSection
+import com.rhbekti.yobo.ui.screen.book.BookScreen
 import com.rhbekti.yobo.ui.screen.category.CategoryScreen
 import com.rhbekti.yobo.ui.theme.YoboTheme
 
@@ -49,6 +50,11 @@ fun HomeScreen(
             title = stringResource(id = R.string.categories),
             content = { CategoryScreen() },
             modifier = modifier.padding(vertical = 8.dp)
+        )
+
+        ContentSection(
+            title = "New Books",
+            content = { BookScreen() }
         )
 
         Button(onClick = onSignOut) {
