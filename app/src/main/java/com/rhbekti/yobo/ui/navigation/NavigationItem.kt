@@ -7,3 +7,7 @@ data class NavigationItem(
     val icon: ImageVector,
     val screen: Screen
 )
+
+data class SettingItem(
+    val title: String
+)

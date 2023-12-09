@@ -58,7 +58,7 @@ fun HomeScreen(
         )
 
         Button(onClick = onSignOut) {
-            Text(text = "Sign out")
+            Text(text = stringResource(id = R.string.sign_out))
         }
     }
 }
