@@ -3,7 +3,7 @@
     <string name="logo_yobo">Logo Yobo</string>
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="web_client_id">189904280792-r13d2sk3lmkeggg6nh8r2jo865n46mj6.apps.googleusercontent.com</string>
-    <string name="sign_in">sign_in</string>
+    <string name="sign_in">Sign In</string>
     <string name="home">home</string>
     <string name="search">search</string>
     <string name="loans">loans</string>
@@ -11,4 +11,9 @@
     <string name="hello">hello</string>
     <string name="loan_book">Loan Book</string>
     <string name="categories">Categories</string>
+    <string name="language">Language</string>
+    <string name="help">Help &amp; Support</string>
+    <string name="term">Term &amp; Privacy Policy</string>
+    <string name="about">About</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

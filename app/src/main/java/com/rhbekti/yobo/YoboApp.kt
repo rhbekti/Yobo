@@ -38,6 +38,7 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.rhbekti.yobo.ui.navigation.NavigationItem
 import com.rhbekti.yobo.ui.navigation.Screen
 import com.rhbekti.yobo.ui.screen.home.HomeScreen
+import com.rhbekti.yobo.ui.screen.profile.ProfileScreen
 import com.rhbekti.yobo.ui.screen.signIn.GoogleAuthUiClient
 import com.rhbekti.yobo.ui.screen.signIn.SignInScreen
 import com.rhbekti.yobo.ui.screen.signIn.SignInViewModel
@@ -84,7 +85,7 @@ fun YoboApp(
 
                 LaunchedEffect(key1 = Unit) {
                     if (googleAuthUiClient.getSignedInUser() !== null) {
-                        navController.navigate(Screen.Home.route){
+                        navController.navigate(Screen.Home.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
                                 saveState = true
                             }
@@ -110,7 +111,7 @@ fun YoboApp(
 
                 LaunchedEffect(key1 = state.isSignInSuccessful) {
                     if (state.isSignInSuccessful) {
-                        navController.navigate(Screen.Home.route){
+                        navController.navigate(Screen.Home.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
                                 saveState = true
                             }
@@ -156,7 +157,15 @@ fun YoboApp(
             }
 
             composable(Screen.Profile.route) {
-
+                ProfileScreen(
+                    userData = googleAuthUiClient.getSignedInUser(),
+                    onSignOut = {
+                        coroutinesScope.launch {
+                            googleAuthUiClient.signOut()
+                            navController.popBackStack()
+                        }
+                    }
+                )
             }
         }
     }
@@ -208,6 +217,13 @@ private fun BottomBar(
                 label = { Text(item.title) },
                 selected = currentRoute == item.screen.route,
                 onClick = {
+                    navController.navigate(item.screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
                 }
             )
         }
