@@ -9,6 +9,6 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories() : CategoryResponse
 
-    @GET("books_dev")
+    @GET("books")
     suspend fun getBooks() : BooksResponse
 }
