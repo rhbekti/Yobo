@@ -1,5 +1,6 @@
 package com.rhbekti.yobo.ui.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,8 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
+import coil.util.DebugLogger
 import com.rhbekti.yobo.model.Book
 
 @Composable
@@ -24,13 +30,36 @@ fun BookItem(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier.fillMaxWidth().padding(vertical = 16.dp)
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
         ) {
-            AsyncImage(
-                model = "https://perpustakaan.smkn1kbm.sch.id/lib/minigalnano/createthumb.php?filename=images/docs/AZZAMINE.jpeg.jpeg&width=200",
-                contentDescription = book.title
+
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(book.photoUrl)
+                    .setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
+                    .size(Size.ORIGINAL)
+                    .build(),
+                imageLoader = ImageLoader.Builder(LocalContext.current).logger(DebugLogger()).build()
             )
-            Text(text = book.title, style = MaterialTheme.typography.labelMedium)
+
+            Image(
+                painter = painter,
+                contentDescription = book.title,
+            )
+
+            Text(
+                text = book.title,
+                style = MaterialTheme.typography.labelMedium,
+                modifier = modifier.padding(8.dp)
+            )
+
+            Text(
+                text = book.year,
+                style = MaterialTheme.typography.labelMedium,
+                modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+            )
         }
     }
 }
