@@ -6,12 +6,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,14 +30,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import androidx.compose.material3.SearchBar
 import com.rhbekti.yobo.R
 import com.rhbekti.yobo.ui.common.UserData
 import com.rhbekti.yobo.ui.component.CardLoan
 import com.rhbekti.yobo.ui.component.ContentSection
+import com.rhbekti.yobo.ui.component.ContentSectionSubsection
 import com.rhbekti.yobo.ui.screen.book.BookScreen
 import com.rhbekti.yobo.ui.screen.category.CategoryScreen
 import com.rhbekti.yobo.ui.theme.YoboTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     userData: UserData?,
@@ -47,14 +56,39 @@ fun HomeScreen(
 
         CardLoan()
 
+        SearchBar(
+            query = "",
+            onQueryChange = {},
+            onSearch = {},
+            active = false,
+            onActiveChange = {},
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            placeholder = {
+                Text("search book")
+            },
+            shape = MaterialTheme.shapes.large,
+            modifier = modifier
+                .padding(vertical = 16.dp)
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
+        ) {
+        }
+
         ContentSection(
-            title = stringResource(id = R.string.categories),
+            title = "Top picks for you",
             content = { CategoryScreen() },
             modifier = modifier.padding(vertical = 8.dp)
         )
 
-        ContentSection(
-            title = "New Books",
+        ContentSectionSubsection(
+            title = "New this book",
+            subTitle = "Discover what’s new on Yobo",
             content = { BookScreen() }
         )
 
