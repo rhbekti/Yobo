@@ -16,3 +16,12 @@ fun SectionText(title: String, modifier: Modifier = Modifier) {
         modifier = modifier.padding(vertical = 8.dp)
     )
 }
+
+@Composable
+fun SubSectionText(subTitle: String, modifier: Modifier = Modifier) {
+    Text(
+        text = subTitle,
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = modifier.padding(vertical = 8.dp)
+    )
+}

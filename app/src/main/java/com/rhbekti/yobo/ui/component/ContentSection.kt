@@ -15,3 +15,17 @@ fun ContentSection(
         content()
     }
 }
+
+@Composable
+fun ContentSectionSubsection(
+    title: String,
+    subTitle: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier) {
+        SectionText(title, modifier)
+        SubSectionText(subTitle = subTitle)
+        content()
+    }
+}

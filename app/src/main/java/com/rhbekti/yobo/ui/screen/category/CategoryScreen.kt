@@ -1,6 +1,5 @@
 package com.rhbekti.yobo.ui.screen.category
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
@@ -34,7 +33,6 @@ fun CategoryScreen(
             }
 
             is Result.Success -> {
-                Log.d("catdata", category.data.toString())
                 CategoryContent(category.data)
             }
         }
@@ -52,7 +50,7 @@ fun CategoryContent(
         modifier = modifier
     ) {
         items(category) {
-            CategoryItem(category = Category(it.photoUrl.toString(), it.title.toString()))
+            CategoryItem(category = Category(it.title.toString()))
         }
     }
 }
