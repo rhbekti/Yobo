@@ -9,8 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -30,15 +28,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.android.gms.auth.api.identity.Identity
 import com.rhbekti.yobo.ui.navigation.NavigationItem
 import com.rhbekti.yobo.ui.navigation.Screen
+import com.rhbekti.yobo.ui.screen.detail.DetailScreen
 import com.rhbekti.yobo.ui.screen.home.HomeScreen
 import com.rhbekti.yobo.ui.screen.profile.ProfileScreen
+import com.rhbekti.yobo.ui.screen.search.SearchScreen
 import com.rhbekti.yobo.ui.screen.signIn.GoogleAuthUiClient
 import com.rhbekti.yobo.ui.screen.signIn.SignInScreen
 import com.rhbekti.yobo.ui.screen.signIn.SignInViewModel
@@ -46,7 +48,6 @@ import com.rhbekti.yobo.ui.theme.YoboTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun YoboApp(
     modifier: Modifier = Modifier,
@@ -66,11 +67,15 @@ fun YoboApp(
     val signInViewModel = viewModel<SignInViewModel>()
     val state by signInViewModel.state.collectAsStateWithLifecycle()
     val isLoginUser = remember { mutableStateOf(false) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
         bottomBar = {
             if (isLoginUser.value) {
-                BottomBar(navController)
+                if (currentRoute != Screen.DetailBook.route) {
+                    BottomBar(navController)
+                }
             }
         },
         modifier = modifier
@@ -139,21 +144,18 @@ fun YoboApp(
 
                 HomeScreen(
                     userData = googleAuthUiClient.getSignedInUser(),
-                    onSignOut = {
-                        coroutinesScope.launch {
-                            googleAuthUiClient.signOut()
-                            navController.popBackStack()
-                        }
+                    navigateToDetail = { bookId ->
+                        navController.navigate(Screen.DetailBook.createRoute(bookId))
                     }
                 )
             }
 
             composable(Screen.Search.route) {
-
-            }
-
-            composable(Screen.Loans.route) {
-
+                SearchScreen(
+                    navigateToDetail = { bookId ->
+                        navController.navigate(Screen.DetailBook.createRoute(bookId))
+                    }
+                )
             }
 
             composable(Screen.Profile.route) {
@@ -164,6 +166,19 @@ fun YoboApp(
                             googleAuthUiClient.signOut()
                             navController.popBackStack()
                         }
+                    }
+                )
+            }
+
+            composable(
+                route = Screen.DetailBook.route,
+                arguments = listOf(navArgument("bookId") { type = NavType.StringType }),
+            ) {
+                val id = it.arguments?.getString("bookId")
+                DetailScreen(
+                    bookId = id.toString(),
+                    navigateBack = {
+                        navController.navigateUp()
                     }
                 )
             }
@@ -193,11 +208,6 @@ private fun BottomBar(
                 title = stringResource(id = R.string.search),
                 icon = Icons.Default.Search,
                 screen = Screen.Search
-            ),
-            NavigationItem(
-                title = stringResource(id = R.string.loans),
-                icon = Icons.Default.ShoppingCart,
-                screen = Screen.Loans
             ),
             NavigationItem(
                 title = stringResource(id = R.string.profile),
