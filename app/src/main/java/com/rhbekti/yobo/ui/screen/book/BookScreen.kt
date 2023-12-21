@@ -1,6 +1,5 @@
 package com.rhbekti.yobo.ui.screen.book
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
@@ -25,7 +24,6 @@ fun BookScreen(
             is Result.Loading -> {}
             is Result.Error -> {}
             is Result.Success -> {
-                Log.d("bookdata", book.data.toString())
                 BookContent(book.data)
             }
         }
