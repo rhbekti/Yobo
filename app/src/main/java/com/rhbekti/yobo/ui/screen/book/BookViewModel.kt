@@ -16,12 +16,12 @@ class BookViewModel(private val repository: YoboRepository) : ViewModel() {
     val books: StateFlow<Result<List<BookItems>>> get() = _books
 
     init {
-        getAllBooks()
+        getBookByYear()
     }
 
-    private fun getAllBooks() {
+    private fun getBookByYear() {
         viewModelScope.launch {
-            repository.getAllBooks()
+            repository.getBookByYear()
                 .collect {
                     _books.value = it
                 }

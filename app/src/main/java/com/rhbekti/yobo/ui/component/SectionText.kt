@@ -22,6 +22,6 @@ fun SubSectionText(subTitle: String, modifier: Modifier = Modifier) {
     Text(
         text = subTitle,
         style = MaterialTheme.typography.bodyMedium,
-        modifier = modifier.padding(vertical = 8.dp)
+        modifier = modifier.padding(bottom = 8.dp)
     )
 }

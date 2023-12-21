@@ -34,7 +34,7 @@ fun CardLoan(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.padding(vertical = 16.dp).fillMaxWidth()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

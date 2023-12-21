@@ -2,6 +2,7 @@ package com.rhbekti.yobo.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,11 +29,11 @@ fun BookItem(
     Card(
         shape = RoundedCornerShape(8.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp)
+                .padding(16.dp)
         ) {
 
             val painter = rememberAsyncImagePainter(
@@ -49,17 +50,27 @@ fun BookItem(
                 contentDescription = book.title,
             )
 
-            Text(
-                text = book.title,
-                style = MaterialTheme.typography.labelMedium,
-                modifier = modifier.padding(8.dp)
-            )
+            Column {
+                Text(
+                    text = book.title,
+                    style = MaterialTheme.typography.labelMedium,
+                    modifier = modifier.padding(8.dp)
+                )
 
-            Text(
-                text = book.year,
-                style = MaterialTheme.typography.labelMedium,
-                modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-            )
+                Row {
+                    Text(
+                        text = book.year,
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+                    )
+
+                    Text(
+                        text = book.author,
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+                    )
+                }
+            }
         }
     }
 }
